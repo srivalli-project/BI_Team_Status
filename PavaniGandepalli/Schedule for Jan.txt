@@ -1,0 +1,11 @@
+Daily :
+
+	C 	:	Atleast one Hacker rank program
+	
+
+Presentations :
+
+	C	: 	Jan 5th and 6th - All topics
+	Python	:	Jan 11th - Basics
+	DS 	: 	Jan 13th or 15th - Including Trees and Graphs
+	Python	:	Jan 21st - Remaining topics

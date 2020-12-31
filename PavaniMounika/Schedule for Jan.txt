@@ -1,0 +1,13 @@
+Daily :
+
+	C 	:	Atleast one Hacker rank program
+	Python 	:	Atlease one hacker rank program
+	
+
+Presentations :
+
+	Perl	: 	Jan 7th 
+	Perl	:	Jan 18th - Remaining topics
+
+Task :
+	Anniversray Mail	: 	by 6th Jan - to be updated with latest data in server

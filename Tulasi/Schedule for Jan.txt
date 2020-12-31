@@ -1,0 +1,9 @@
+Daily :
+
+	C 	:	Atleast one Hacker rank program
+	Python 	:	Atlease one hacker rank program
+	
+
+Presentations :
+	Perl	: 	Jan 8th 
+	Perl	:	Jan 12th - Remaining topics

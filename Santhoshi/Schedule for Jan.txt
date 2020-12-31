@@ -1,0 +1,12 @@
+Daily :
+
+	C 	:	Atleast one Hacker rank program
+	Python 	:	Atlease one hacker rank program
+	
+
+Presentations :
+	Perl	: 	Jan 8th 
+	Perl	:	Jan 12th - Remaining topics
+
+Task :
+	Birthday Calendar	: 	by 5th Jan - to be updated with latest data in server
