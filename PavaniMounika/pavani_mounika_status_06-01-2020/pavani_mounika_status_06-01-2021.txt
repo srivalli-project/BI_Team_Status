@@ -1,0 +1,17 @@
+Hacker Rank:
+C: wrote code for array reversal problem.
+Python: wrote code for print function problem.
+
+Perl:
+- today i preapred topics in perl are as follows:
+	Data Types
+	Scalars
+	Arrays
+	Hashes
+	Strings
+	Decision Making
+	Loops
+	for loop
+	foreach loop
+	while and do…while loop
+- Prepared presentation on the preapred topics.
