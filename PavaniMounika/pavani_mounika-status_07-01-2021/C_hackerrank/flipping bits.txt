@@ -1,0 +1,159 @@
+"""
+You will be given a list of 32 bit unsigned integers. Flip all the bits ( and ) and print the result as an unsigned integer.
+
+For example, your decimal input . We're working with 32 bits, so:
+
+
+
+Function Description
+
+Complete the flippingBits function in the editor below. It should return the unsigned decimal integer result.
+
+flippingBits has the following parameter(s):
+
+n: an integer
+Input Format
+
+The first line of the input contains , the number of queries.
+Each of the next  lines contain an integer, , to process.
+
+Constraints
+
+
+
+Output Format
+
+Output one line per element from the list with the decimal value of the resulting unsigned integer.
+
+Sample Input 0
+
+3
+2147483647
+1
+0
+Sample Output 0
+
+2147483648
+4294967294
+4294967295
+Explanation 0
+
+
+
+
+
+
+
+Sample Input 1
+
+2
+4
+123456
+Sample Output 1
+
+4294967291
+4294843839
+Explanation 1
+
+
+
+
+
+Sample Input 2
+
+3
+0
+802743475
+35601423
+Sample Output 2
+
+4294967295
+3492223820
+4259365872
+"""
+solution:
+#include <assert.h>
+#include <limits.h>
+#include <math.h>
+#include <stdbool.h>
+#include <stddef.h>
+#include <stdint.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+char* readline();
+
+// Complete the flippingBits function below.
+long flippingBits(long n) {
+    return n^4294967295; // max long value
+
+}
+
+int main()
+{
+    FILE* fptr = fopen(getenv("OUTPUT_PATH"), "w");
+
+    char* q_endptr;
+    char* q_str = readline();
+    int q = strtol(q_str, &q_endptr, 10);
+
+    if (q_endptr == q_str || *q_endptr != '\0') { exit(EXIT_FAILURE); }
+
+    for (int q_itr = 0; q_itr < q; q_itr++) {
+        char* n_endptr;
+        char* n_str = readline();
+        long n = strtol(n_str, &n_endptr, 10);
+
+        if (n_endptr == n_str || *n_endptr != '\0') { exit(EXIT_FAILURE); }
+
+        long result = flippingBits(n);
+
+        fprintf(fptr, "%ld\n", result);
+    }
+
+    fclose(fptr);
+
+    return 0;
+}
+
+char* readline() {
+    size_t alloc_length = 1024;
+    size_t data_length = 0;
+    char* data = malloc(alloc_length);
+
+    while (true) {
+        char* cursor = data + data_length;
+        char* line = fgets(cursor, alloc_length - data_length, stdin);
+
+        if (!line) {
+            break;
+        }
+
+        data_length += strlen(cursor);
+
+        if (data_length < alloc_length - 1 || data[data_length - 1] == '\n') {
+            break;
+        }
+
+        alloc_length <<= 1;
+
+        data = realloc(data, alloc_length);
+
+        if (!line) {
+            break;
+        }
+    }
+
+    if (data[data_length - 1] == '\n') {
+        data[data_length - 1] = '\0';
+
+        data = realloc(data, data_length);
+    } else {
+        data = realloc(data, data_length + 1);
+
+        data[data_length] = '\0';
+    }
+
+    return data;
+}
