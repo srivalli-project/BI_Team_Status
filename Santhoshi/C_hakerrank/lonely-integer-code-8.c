@@ -23,23 +23,38 @@ int lonelyinteger(int a_count, int* a) {
         {
             if(a[i] == a[j])
             {
+                b[l]=a[j];
+                //printf("a[j]=%d\n",a[j]);
                 for(k = j; k < a_count; k++)
                 {
                     a[k] = a[k+1];
                 }
                 a_count--;
+                l++;
             }
             else {
-            b[l]=a[j];
-            l++;
             j++;
             }
             
         }
       
     }
-
-return b[0];
+int ans,cnt=0;
+for(i=0;i<a_count;i++)
+{
+    cnt=0;
+    for(j=0;j<l;j++)
+    {
+        if(a[i]==b[j])
+        cnt++;
+    }
+    if(cnt == 0)
+    {
+         ans=a[i];
+         break;
+    }   
+}
+return ans;
 }
 
 int main()
@@ -128,14 +143,15 @@ char** split_string(char* str) {
 
     return splits;
 }
+
 /*output
+Compiler Message
+Success
 Input (stdin)
 
 Download
-3
-1 1 2
-Your Output (stdout)
-2
+5
+0 0 1 2 1
 Expected Output
 
 Download
