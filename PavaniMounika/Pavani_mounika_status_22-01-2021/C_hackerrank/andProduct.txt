@@ -1,0 +1,165 @@
+/*
+Consider two non-negative long integers,  and , where . The bitwise AND of all long integers in the inclusive range between  and  can be expressed as , where  is the bitwise AND operator.
+
+Given  pairs of long integers,  and , compute and print the bitwise AND of all natural numbers in the inclusive range between  and .
+
+For example, if  and , the calculation is .
+
+Function Description
+
+Complete the andProduct in the editor below. It should return the computed value as an integer.
+
+andProduct has the following parameter(s):
+
+a: an integer
+b: an integer
+Input Format
+
+The first line contains a single integer , the number of intervals to test.
+Each of the next  lines contains two space-separated integers  and .
+
+Constraints
+
+Output Format
+
+For each pair of long integers, print the bitwise AND of all numbers in the inclusive range between  and  on a new line.
+
+Sample Input 0
+
+3
+12 15
+2 3
+8 13
+Sample Output 0
+
+12
+2
+8
+Explanation 0
+
+There are three pairs to compute results for:
+
+ and 
+, so we print  on a new line.
+ and 
+ and 
+Sample Input 1
+
+2
+17 23
+11 15
+Sample Output 1
+
+16
+8
+*/
+
+Solution:
+#include <assert.h>
+#include <limits.h>
+#include <math.h>
+#include <stdbool.h>
+#include <stddef.h>
+#include <stdint.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+char* readline();
+char** split_string(char*);
+
+// Complete the andProduct function below.
+long andProduct(long a, long b) {
+    long int i,res;
+    res=a&(a+1);
+    for(i=a+2;i<=b;i++)
+        res=res&i;
+    return res;
+}
+
+int main()
+{
+    FILE* fptr = fopen(getenv("OUTPUT_PATH"), "w");
+
+    char* n_endptr;
+    char* n_str = readline();
+    int n = strtol(n_str, &n_endptr, 10);
+
+    if (n_endptr == n_str || *n_endptr != '\0') { exit(EXIT_FAILURE); }
+
+    for (int n_itr = 0; n_itr < n; n_itr++) {
+        char** ab = split_string(readline());
+
+        char* a_endptr;
+        char* a_str = ab[0];
+        long a = strtol(a_str, &a_endptr, 10);
+
+        if (a_endptr == a_str || *a_endptr != '\0') { exit(EXIT_FAILURE); }
+
+        char* b_endptr;
+        char* b_str = ab[1];
+        long b = strtol(b_str, &b_endptr, 10);
+
+        if (b_endptr == b_str || *b_endptr != '\0') { exit(EXIT_FAILURE); }
+
+        long result = andProduct(a, b);
+
+        fprintf(fptr, "%ld\n", result);
+    }
+
+    fclose(fptr);
+
+    return 0;
+}
+
+char* readline() {
+    size_t alloc_length = 1024;
+    size_t data_length = 0;
+    char* data = malloc(alloc_length);
+
+    while (true) {
+        char* cursor = data + data_length;
+        char* line = fgets(cursor, alloc_length - data_length, stdin);
+
+        if (!line) { break; }
+
+        data_length += strlen(cursor);
+
+        if (data_length < alloc_length - 1 || data[data_length - 1] == '\n') { break; }
+
+        size_t new_length = alloc_length << 1;
+        data = realloc(data, new_length);
+
+        if (!data) { break; }
+
+        alloc_length = new_length;
+    }
+
+    if (data[data_length - 1] == '\n') {
+        data[data_length - 1] = '\0';
+    }
+
+    data = realloc(data, data_length);
+
+    return data;
+}
+
+char** split_string(char* str) {
+    char** splits = NULL;
+    char* token = strtok(str, " ");
+
+    int spaces = 0;
+
+    while (token) {
+        splits = realloc(splits, sizeof(char*) * ++spaces);
+        if (!splits) {
+            return splits;
+        }
+
+        splits[spaces - 1] = token;
+
+        token = strtok(NULL, " ");
+    }
+
+    return splits;
+}
