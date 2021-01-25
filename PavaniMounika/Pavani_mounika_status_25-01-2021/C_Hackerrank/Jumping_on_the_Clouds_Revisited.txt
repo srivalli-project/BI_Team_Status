@@ -1,0 +1,175 @@
+/*
+A child is playing a cloud hopping game. In this game, there are sequentially numbered clouds that can be thunderheads or cumulus clouds. The character must jump from cloud to cloud until it reaches the start again.
+
+There is an array of clouds,  and an energy level . The character starts from  and uses  unit of energy to make a jump of size  to cloud . If it lands on a thundercloud, , its energy () decreases by  additional units. The game ends when the character lands back on cloud .
+
+Given the values of , , and the configuration of the clouds as an array , determine the final value of  after the game ends.
+
+Example. 
+
+The indices of the path are . The energy level reduces by  for each jump to . The character landed on one thunderhead at an additional cost of  energy units. The final energy level is .
+
+Note: Recall that  refers to the modulo operation. In this case, it serves to make the route circular. If the character is at  and jumps , it will arrive at .
+
+Function Description
+
+Complete the jumpingOnClouds function in the editor below.
+
+jumpingOnClouds has the following parameter(s):
+
+int c[n]: the cloud types along the path
+int k: the length of one jump
+Returns
+
+int: the energy level remaining.
+Input Format
+
+The first line contains two space-separated integers,  and , the number of clouds and the jump distance.
+The second line contains  space-separated integers  where . Each cloud is described as follows:
+
+If , then cloud  is a cumulus cloud.
+If , then cloud  is a thunderhead.
+Constraints
+
+Sample Input
+
+STDIN             Function
+-----             --------
+8 2               n = 8, k = 2
+0 0 1 0 0 1 1 0   c = [0, 0, 1, 0, 0, 1, 1, 0]
+Sample Output
+
+92
+Explanation
+
+In the diagram below, red clouds are thunderheads and purple clouds are cumulus clouds:
+
+game board
+*/
+
+Solution:
+#include <assert.h>
+#include <limits.h>
+#include <math.h>
+#include <stdbool.h>
+#include <stddef.h>
+#include <stdint.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+char* readline();
+char** split_string(char*);
+
+// Complete the jumpingOnClouds function below.
+int jumpingOnClouds(int c_count, int* c, int k) {
+    int i=0,e=100;
+    for(;i<c_count;)
+    {        
+        if(c[i]==1)
+            e=e-1-2;
+        else
+            e=e-1;
+        i=i+k; 
+        if (i>c_count)      
+        {
+            i=i-c_count;
+        }
+    }
+    return e;
+}
+
+int main()
+{
+    FILE* fptr = fopen(getenv("OUTPUT_PATH"), "w");
+
+    char** nk = split_string(readline());
+
+    char* n_endptr;
+    char* n_str = nk[0];
+    int n = strtol(n_str, &n_endptr, 10);
+
+    if (n_endptr == n_str || *n_endptr != '\0') { exit(EXIT_FAILURE); }
+
+    char* k_endptr;
+    char* k_str = nk[1];
+    int k = strtol(k_str, &k_endptr, 10);
+
+    if (k_endptr == k_str || *k_endptr != '\0') { exit(EXIT_FAILURE); }
+
+    char** c_temp = split_string(readline());
+
+    int* c = malloc(n * sizeof(int));
+
+    for (int i = 0; i < n; i++) {
+        char* c_item_endptr;
+        char* c_item_str = *(c_temp + i);
+        int c_item = strtol(c_item_str, &c_item_endptr, 10);
+
+        if (c_item_endptr == c_item_str || *c_item_endptr != '\0') { exit(EXIT_FAILURE); }
+
+        *(c + i) = c_item;
+    }
+
+    int c_count = n;
+
+    int result = jumpingOnClouds(c_count, c, k);
+
+    fprintf(fptr, "%d\n", result);
+
+    fclose(fptr);
+
+    return 0;
+}
+
+char* readline() {
+    size_t alloc_length = 1024;
+    size_t data_length = 0;
+    char* data = malloc(alloc_length);
+
+    while (true) {
+        char* cursor = data + data_length;
+        char* line = fgets(cursor, alloc_length - data_length, stdin);
+
+        if (!line) { break; }
+
+        data_length += strlen(cursor);
+
+        if (data_length < alloc_length - 1 || data[data_length - 1] == '\n') { break; }
+
+        size_t new_length = alloc_length << 1;
+        data = realloc(data, new_length);
+
+        if (!data) { break; }
+
+        alloc_length = new_length;
+    }
+
+    if (data[data_length - 1] == '\n') {
+        data[data_length - 1] = '\0';
+    }
+
+    data = realloc(data, data_length);
+
+    return data;
+}
+
+char** split_string(char* str) {
+    char** splits = NULL;
+    char* token = strtok(str, " ");
+
+    int spaces = 0;
+
+    while (token) {
+        splits = realloc(splits, sizeof(char*) * ++spaces);
+        if (!splits) {
+            return splits;
+        }
+
+        splits[spaces - 1] = token;
+
+        token = strtok(NULL, " ");
+    }
+
+    return splits;
+}
