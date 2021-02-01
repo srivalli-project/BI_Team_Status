@@ -1,0 +1,15 @@
+Quadrant standard edition --> not working properly  becuase it is made for old version of android, after running when I click 
+proceed, it is saying network not found
+
+linpack --> score
+
+
+neocore --> not able to open becuase it is made for old version of android
+antutu --> it is giving warning 
+vellamo-->  becuase it is made for old version of android
+	metal: 3578
+
+
+
+
+
