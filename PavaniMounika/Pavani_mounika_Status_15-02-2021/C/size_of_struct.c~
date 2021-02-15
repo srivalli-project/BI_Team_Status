@@ -1,0 +1,17 @@
+#include <stdio.h>
+
+struct node{
+	int i;
+	char c;
+	int *iptr;
+};
+
+int main()
+{
+	struct node *ptr = NULL;
+	ptr++;
+	printf("size of structure:%d\n",ptr); 
+
+	return 0;
+}
+
